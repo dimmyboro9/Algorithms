@@ -4,9 +4,10 @@ There is a repository containing my implementation of different algorithms in C+
 ## Projects
 - [BFS modification](#BFS-modification)
 - [AVL tree](#AVL-tree)
+- [Dynamic programming](#Dynamic-programming)
 
 ## BFS modification
-My task is to implement the function `std::list<Place> find_path(const Map &map)`, which will find the shortest possible walk in the given graph (represented as a map of rooms), picking up at least one given component of each type (there are various types of items I have to pick up). The first element of the walk must be `map.start`, the last one `map.end`, and there must be a corridor between each pair of consecutive places. If such a walk does not exist, return an empty list. 
+My task is to implement the function `std::list<Place> find_path(const Map &map)`, which will find the shortest possible walk in the given graph (represented as a map of rooms), picking up at least one given component of each type (there are various types of items I have to pick up). The first element of the walk must be `map.start`, the last one `map.end`, and there must be a corridor (an edge) between each pair of consecutive places. If such a walk does not exist, return an empty list. 
 
 The `Map` structure contains the following items:
 * `places`: the number of rooms (vertices of the graph),
@@ -21,7 +22,7 @@ This program correctly and quickly solve instances with approximately 3000 rooms
 To solve this task I will implement and use **BFS modification**.
 
 ## AVL tree
-My task is to implement a template class `Bestsellers` parameterized by the type `Product`, which serves as an identifier for individual products. It is promised that the type `Product` has a copy `constructor` (and `assignment operator`), `destructor`, `comparison operators`, and `std::hash` is implemented for it. 
+There is a toy store that keeps track of the quantity of purchased and sold toys of different types. My task is to implement a template class `Bestsellers` parameterized by the type `Product`, which serves as an identifier for individual products. It is promised that the type `Product` has a copy `constructor` (and `assignment operator`), `destructor`, `comparison operators`, and `std::hash` is implemented for it. 
 
 The `Bestsellers` class must implement the following public methods:
 
@@ -36,3 +37,18 @@ The `Bestsellers` class must implement the following public methods:
 If the arguments of the function calls are invalid (i.e., rank outside the range or an unknown product in the `rank` method), throw an `std::out_of_range exception`.
 
 To implement all these functions, I will implement and use the data structure **AVL tree**.
+
+## Dynamic programming
+We have a city map where all streets together form a tree structure (in terms of data structure), which is not very practical, but it doesn't bother anyone. Houses (graph vertices) are located at the nodes of the streets, while the streets themselves are the edges of the graph. There is a Christmas tree on some of the vertices of graph under which gifts are placed. To prevent the Grinch from stealing gifts from children, special agents are placed on the nodes (houses) to ensure the Grinch cannot ruin Christmas.
+
+My task is to find the deployment of secret service agents in the streets of the city so that the maximum number of gifts is protected. However, I should be careful not to have large groups of agents close to each other in the streets (because it's a secret service). Agents are considered to be in the same group if there is no ungifted tree between them.
+
+So assignment is to implement the function `uint64_t solve(const TreeProblem&)`, which calculates how many gifts can be saved with the best possible arrangement of guards. The problem instance is described by the structure `TreeProblem`, which contains the following items:
+
+* `max_group_size`: The maximum size of a group of guards. This value is maximally equal to **2**.
+* `gifts`: A vector specifying the number of gifts under each tree. The length of this vector also represents the total number of trees.
+* `connections`: A vector of pairs indicating which trees are at opposite ends of the same street, so if both are guarded, their guards belong to the same group.
+
+A naive exponential implementation isn't sufficient. The implementation must be efficient as inputs are large, and the stack size is limited to 1 MiB. It is necessary to correctly solve instances with `max_group_size = 2`.
+
+To solve this problem, I will use the **dynamic programming** approach.
