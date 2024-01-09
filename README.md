@@ -5,6 +5,7 @@ There is a repository containing my implementation of different algorithms in C+
 - [BFS modification](#BFS-modification)
 - [AVL tree](#AVL-tree)
 - [Dynamic programming](#Dynamic-programming)
+- [Automata](#Automata)
 
 ## BFS modification
 My task is to implement the function `std::list<Place> find_path(const Map &map)`, which will find the shortest possible walk in the given graph (represented as a map of rooms), picking up at least one given component of each type (there are various types of items I have to pick up). The first element of the walk must be `map.start`, the last one `map.end`, and there must be a corridor (an edge) between each pair of consecutive places. If such a walk does not exist, return an empty list. 
@@ -26,12 +27,12 @@ There is a toy store that keeps track of the quantity of purchased and sold toys
 
 The `Bestsellers` class must implement the following public methods:
 
-* `size_t products() const` - returns the number of recorded types of goods (not the number of sold items).
-* `void sell(const Product& p, size_t amount)` - records the sale of amount `items` of the product `p`.
-* `size_t rank(const Product& p) const` - returns the ranking (from 1) of the best-selling product `p` (if multiple products have sold the same amount, their order can be arbitrary).
-* `const Product& product(size_t rank) const` - inverse function to rank (if no exception occurs, it always holds that `product(rank(p)) == p` and `rank(product(r)) == r`).
-* `size_t sold(size_t r) const` - returns the number of sold items of the `r`-th best-selling product.
-* `size_t sold(size_t from, size_t to) const` - similar to the one-parameter version, but returns the sum of sold items over the interval from `from` to `to` (inclusive on both ends; i.e., `sold(r, r) == sold(r)` and `sold(1, products()`) is the total number of sold items across all types of goods; input where `to` < `from` is considered invalid).
+* `size_t products() const` - returns the number of recorded types of goods (not the number of sold items),
+* `void sell(const Product& p, size_t amount)` - records the sale of amount `items` of the product `p`,
+* `size_t rank(const Product& p) const` - returns the ranking (from 1) of the best-selling product `p` (if multiple products have sold the same amount, their order can be arbitrary),
+* `const Product& product(size_t rank) const` - inverse function to rank (if no exception occurs, it always holds that `product(rank(p)) == p` and `rank(product(r)) == r`),
+* `size_t sold(size_t r) const` - returns the number of sold items of the `r`-th best-selling product,
+* `size_t sold(size_t from, size_t to) const` - similar to the one-parameter version, but returns the sum of sold items over the interval from `from` to `to` (inclusive on both ends; i.e., `sold(r, r) == sold(r)` and `sold(1, products()`) is the total number of sold items across all types of goods; input where `to` < `from` is considered invalid),
 * `size_t first_same(size_t r) const` and `size_t last_same(size_t r) const` - return the smallest (largest) rank `r'` for which `sold(r') == sold(r)`. 
 
 If the arguments of the function calls are invalid (i.e., rank outside the range or an unknown product in the `rank` method), throw an `std::out_of_range exception`.
@@ -45,10 +46,20 @@ My task is to find the deployment of secret service agents in the streets of the
 
 So assignment is to implement the function `uint64_t solve(const TreeProblem&)`, which calculates how many gifts can be saved with the best possible arrangement of guards. The problem instance is described by the structure `TreeProblem`, which contains the following items:
 
-* `max_group_size`: The maximum size of a group of guards. This value is maximally equal to **2**.
-* `gifts`: A vector specifying the number of gifts under each tree. The length of this vector also represents the total number of trees.
+* `max_group_size`: The maximum size of a group of guards. This value is maximally equal to **2**,
+* `gifts`: A vector specifying the number of gifts under each tree. The length of this vector also represents the total number of trees,
 * `connections`: A vector of pairs indicating which trees are at opposite ends of the same street, so if both are guarded, their guards belong to the same group.
 
 A naive exponential implementation isn't sufficient. The implementation must be efficient as inputs are large, and the stack size is limited to 1 MiB. It is necessary to correctly solve instances with `max_group_size = 2`.
 
 To solve this problem, I will use the **dynamic programming** approach.
+
+## Automata
+The task is to implement algorithms that allow to find the `minimal deterministic finite automaton` accepting the intersection or union of languages specified by pairs of finite automata. The goal is to implement a set of two functions with the following signatures:
+
+* `DFA unify(const NFA&, const NFA&)`,
+* `DFA intersect(const NFA&, const NFA&)`.
+
+The input for the algorithms is two automata **NFA**, representing non-deterministic finite automata. Both of these functions must return a minimal deterministic finite automaton **DFA** for the given language.
+
+`Copyright (c) Dmytro Borovko 2023`
