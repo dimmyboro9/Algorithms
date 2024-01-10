@@ -1,0 +1,6 @@
+| Select an algorithm to visualize: |
+| 1. Random Search                  |
+| 2. Breadth-First Search (BFS)     |
+| 3. Depth-First Search (DFS)       |
+| 4. Greedy                         |
+| 5. A*                             |

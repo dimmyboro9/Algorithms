@@ -1,0 +1,4 @@
+|       Menu      |
+| n - Next map    |
+| p - Prev map    |
+| c - Confirm map |

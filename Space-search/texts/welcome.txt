@@ -1,0 +1,11 @@
+Welcome to the Pathfinding Program!
+
+This program allows you to choose a map with a starting position and an ending position, and apply various pathfinding algorithms to find the shortest route between the two points.
+
+You can choose from the following algorithms: random search, breadth-first search (BFS), depth-first search (DFS), greedy algorithm, and A* algorithm.
+
+Once you have selected a map and an algorithm, the program will display the pathfinding process step by step, highlighting the cells visited by the algorithm and the path found from start to end.
+
+Let's get started!
+
+Please press enter button to start.

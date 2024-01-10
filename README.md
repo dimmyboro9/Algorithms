@@ -6,6 +6,7 @@ There is a repository containing my implementation of different algorithms in C+
 - [AVL tree](#AVL-tree)
 - [Dynamic programming](#Dynamic-programming)
 - [Automata](#Automata)
+- [Space search algorithms](#Space-search-algorithms)
 
 ## BFS modification
 My task is to implement the function `std::list<Place> find_path(const Map &map)`, which will find the shortest possible walk in the given graph (represented as a map of rooms), picking up at least one given component of each type (there are various types of items I have to pick up). The first element of the walk must be `map.start`, the last one `map.end`, and there must be a corridor (an edge) between each pair of consecutive places. If such a walk does not exist, return an empty list. 
@@ -62,4 +63,67 @@ The task is to implement algorithms that allow to find the `minimal deterministi
 
 The input for the algorithms is two automata **NFA**, representing non-deterministic finite automata. Both of these functions must return a minimal deterministic finite automaton **DFA** for the given language.
 
-`Copyright (c) Dmytro Borovko 2023`
+## Space search algorithms
+Within this task, I implement `five methods` of systematic state space search and demonstrate the functionality of the implemented algorithms in solving the pathfinding problem.
+
+Methods I want to implement:
+* `Random Search`,
+* `DFS` without depth limit,
+* `BFS`,
+* `Greedy Search`,
+* `A* algorithm`
+
+`Input`: Mazes for algorithm testing. Mazes are available in the form of text files.
+The maze format:
+
+``` plaintext
+XXXXXXXXXXXXX
+X           X
+X  XXXXXXX  X
+X     X     X
+X X X X XXX X
+X X         X
+XX  X XXXXX X
+X   X       X
+X X X XXX XXX
+X           X
+X XXX X   X X
+X           X
+XXXXXXXXXXXXX
+start 1, 7
+end 5, 3
+```
+
+* X represents impassable walls, while spaces indicate free passages.
+* The position is given in Cartesian coordinates, with the origin of the coordinate system in the upper-left corner, and the positive y-axis oriented downward.
+* "start 1, 7" means that the start is located at coordinates \[1, 7\].
+
+`Output`: Simple visualization of the activity of each algorithm + output of the length of the found path + information about which fields the program includes in the path length.
+
+```plaintext
+XXXXXXXXXXXXX
+X           X
+X  XXXXXXX  X
+X ###EX     X
+X X#XoX XXX X
+X Xooo#     X
+XX#oX#XXXXX X
+XSooX       X
+X#X#X XXX XXX
+X           X
+X XXX X   X X
+X           X
+XXXXXXXXXXXXX
+---------------------------------------
+S Start
+E End
+# Opened node
+o Path
+X Wall
+space Fresh node
+---------------------------------------
+Nodes expanded: 17
+Path length: 8
+```
+
+`Copyright (c) Dmytro Borovko 2024`

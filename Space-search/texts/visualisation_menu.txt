@@ -1,0 +1,3 @@
+| Please choose an option:      |
+| n - Next step                 |
+| p - Find the path immediately |

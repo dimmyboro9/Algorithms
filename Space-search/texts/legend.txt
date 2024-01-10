@@ -1,0 +1,6 @@
+S Start
+E End
+# Opened node
+o Path
+X Wall
+space Fresh node
